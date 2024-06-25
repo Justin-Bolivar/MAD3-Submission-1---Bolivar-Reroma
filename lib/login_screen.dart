@@ -43,29 +43,60 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(50.0),
+            padding: const EdgeInsets.all(70.0),
             child: Form(
               key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/logo.png', width: 300, height: 300), // logo here
+                  Image.asset('assets/logo.png', width: 250, height: 250), // logo here
                   const SizedBox(height: 20),
                   TextFormField(
                     controller: _usernameController,
-                    decoration: const InputDecoration(labelText: 'Username'),
+                    decoration: const InputDecoration(labelText: 'Username',
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Color(0xFF266D80), width: 1.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Color(0xFF266D80), width: 1.0),
+                                      ),
+                                    ),
+                    
                     validator: (value) =>
                         value?.isEmpty?? true? 'Enter your username' : null,
                   ),
+                  const SizedBox(height: 10),
                   TextFormField(
                     controller: _passwordController,
-                    decoration: const InputDecoration(labelText: 'Password'),
+                    decoration: 
+                      const InputDecoration(
+                        labelText: 'Password',
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF266D80), width: 1.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF266D80), width: 1.0),
+                        ),
+                      ),
                     obscureText: true,
                     validator: (value) =>
                         value?.isEmpty?? true? 'Enter your password' : null,
                   ),
                   const SizedBox(height: 20),
-                  ElevatedButton(onPressed: _login, child: const Text('Login')),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.pressed)) {
+                          return const Color(0xFF266D80); // Darker shade for pressed state
+                        }
+                        return const Color(0xFF73CCE4); // Initial background color
+                      },
+                    ),
+                    foregroundColor: WidgetStateProperty.all<Color>(Colors.white), // Text color
+                  ),
+                    onPressed: _login, 
+                    child: const Text('Login')),
                   if (_errorMessage.isNotEmpty)
                     Text(_errorMessage, style: const TextStyle(color: Colors.red)),
                 ],

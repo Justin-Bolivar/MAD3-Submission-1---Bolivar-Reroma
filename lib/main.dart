@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       routes: [
         GoRoute(
           path: '/login',
-          builder: (context, state) => LoginScreen(),
+          builder: (context, state) => const LoginScreen(),
         ),
         GoRoute(
           path: '/home',
@@ -47,6 +47,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 10, 100, 135)),
+        useMaterial3: true,
+      ),
     );
   }
 }
