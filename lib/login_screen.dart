@@ -14,6 +14,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   String _errorMessage = '';
+  bool _isPasswordVisible = false;
+
 
   void _login() {
     if (_formKey.currentState?.validate() ?? false) {
@@ -68,17 +70,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 10),
                   TextFormField(
                     controller: _passwordController,
-                    decoration: 
-                      const InputDecoration(
-                        labelText: 'Password',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF266D80), width: 1.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF266D80), width: 1.0),
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF266D80), width: 1.0),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF266D80), width: 1.0),
+                      ),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          // Toggle the visibility of the password
+                          setState(() {
+                            _isPasswordVisible =!_isPasswordVisible;
+                          });
+                        },
+                        child: Icon(
+                          _isPasswordVisible? Icons.visibility_off : Icons.visibility,
+                          color: Colors.grey, // Optional: Change icon color
                         ),
                       ),
-                    obscureText: true,
+                    ),
+                    obscureText:!_isPasswordVisible, // Use the state variable to control obscuration
                     validator: (value) =>
                         value?.isEmpty?? true? 'Enter your password' : null,
                   ),
