@@ -32,34 +32,47 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                controller: _usernameController,
-                decoration: const InputDecoration(labelText: 'Username'),
-                validator: (value) =>
-                    value?.isEmpty ?? true ? 'Enter your username' : null,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,
               ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
-                obscureText: true,
-                validator: (value) =>
-                    value?.isEmpty ?? true ? 'Enter your password' : null,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(onPressed: _login, child: const Text('Login')),
-              if (_errorMessage.isNotEmpty)
-                Text(_errorMessage, style: const TextStyle(color: Colors.red)),
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/logo.png', width: 300, height: 300), // logo here
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: const InputDecoration(labelText: 'Username'),
+                    validator: (value) =>
+                        value?.isEmpty?? true? 'Enter your username' : null,
+                  ),
+                  TextFormField(
+                    controller: _passwordController,
+                    decoration: const InputDecoration(labelText: 'Password'),
+                    obscureText: true,
+                    validator: (value) =>
+                        value?.isEmpty?? true? 'Enter your password' : null,
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(onPressed: _login, child: const Text('Login')),
+                  if (_errorMessage.isNotEmpty)
+                    Text(_errorMessage, style: const TextStyle(color: Colors.red)),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
