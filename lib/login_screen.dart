@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/logo.png', width: 250, height: 250), // logo here
+                  Image.asset('assets/logo.png', width: 250, height: 250), 
                   const SizedBox(height: 20),
                   TextFormField(
                     controller: _usernameController,
@@ -80,18 +80,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       suffixIcon: GestureDetector(
                         onTap: () {
-                          // Toggle the visibility of the password
+                          
                           setState(() {
                             _isPasswordVisible =!_isPasswordVisible;
                           });
                         },
                         child: Icon(
                           _isPasswordVisible? Icons.visibility_off : Icons.visibility,
-                          color: Colors.grey, // Optional: Change icon color
+                          color: Colors.grey, 
                         ),
                       ),
                     ),
-                    obscureText:!_isPasswordVisible, // Use the state variable to control obscuration
+                    obscureText:!_isPasswordVisible, 
                     validator: (value) =>
                         value?.isEmpty?? true? 'Enter your password' : null,
                   ),
@@ -101,12 +101,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: WidgetStateProperty.resolveWith<Color>(
                       (Set<WidgetState> states) {
                         if (states.contains(WidgetState.pressed)) {
-                          return const Color(0xFF266D80); // Darker shade for pressed state
+                          return const Color(0xFF266D80); 
                         }
-                        return const Color(0xFF73CCE4); // Initial background color
+                        return const Color(0xFF73CCE4); 
                       },
                     ),
-                    foregroundColor: WidgetStateProperty.all<Color>(Colors.white), // Text color
+                    foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
                   ),
                     onPressed: _login, 
                     child: const Text('Login')),
